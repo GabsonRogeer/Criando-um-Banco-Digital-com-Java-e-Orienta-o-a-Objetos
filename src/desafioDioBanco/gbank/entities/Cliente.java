@@ -3,16 +3,22 @@ package desafioDioBanco.gbank.entities;
 import java.util.Date;
 
 public class Cliente {
-
     private String nome;
     private Date dataDeNascimento;
     private String cpf;
 
     public Cliente() {}
 
+    public Cliente(String nome, Date dataDeNascimento, String cpf) {
+        this.nome = nome;
+        this.dataDeNascimento = dataDeNascimento;
+        this.cpf = cpf;
+    }
+
     public String getNome() {
         return nome;
     }
+
     public Date getDataDeNascimento() {
         return dataDeNascimento;
     }

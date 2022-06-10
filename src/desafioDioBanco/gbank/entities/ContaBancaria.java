@@ -3,7 +3,7 @@ package desafioDioBanco.gbank.entities;
 import java.util.Date;
 import java.util.Random;
 
-public class ContaBancaria {
+public class ContaBancaria extends Instituicao {
     private String numConta;
     private boolean ativa;
     private Double saldo;
@@ -60,12 +60,12 @@ public class ContaBancaria {
         this.dataCriacao = dataCriacao;
     }
 
-    public CartaoDigital getCartaoCredito() {
-        return cartaoCredito;
-    }
-
     public void setCartaoCredito(CartaoDigital cartaoCredito) {
         this.cartaoCredito = cartaoCredito;
+    }
+
+    public CartaoDigital getCartaoCredito() {
+        return cartaoCredito;
     }
 
     public boolean isPossuiCredito() {
