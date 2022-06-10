@@ -12,6 +12,9 @@ public class ContaBancaria extends Instituicao {
     private CartaoDigital cartaoCredito;
     private boolean possuiCredito;
 
+    private String chavePix;
+
+
     public ContaBancaria() {
         Random random = new Random();
         this.numConta = "" + random.nextInt(4) + "-" + random.nextInt(1);
@@ -58,6 +61,14 @@ public class ContaBancaria extends Instituicao {
 
     public void setDataCriacao(Date dataCriacao) {
         this.dataCriacao = dataCriacao;
+    }
+
+    public String getChavePix() {
+        return chavePix;
+    }
+
+    public void setChavePix(String chavePix) {
+        this.chavePix = chavePix;
     }
 
     public void setCartaoCredito(CartaoDigital cartaoCredito) {

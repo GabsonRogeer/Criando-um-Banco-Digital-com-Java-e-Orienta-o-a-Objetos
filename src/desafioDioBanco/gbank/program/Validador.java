@@ -14,7 +14,6 @@ public class Validador {
         }
         return true;
     }
-
     public static boolean validaDados(ContaBancaria conta) {
         if(conta == null){
             System.out.println("Conta não foi preenchida");
@@ -83,4 +82,6 @@ public class Validador {
         System.out.println("O Cpf informado não pertence a nenhuma conta!");
         return false;
     }
+
+
 }

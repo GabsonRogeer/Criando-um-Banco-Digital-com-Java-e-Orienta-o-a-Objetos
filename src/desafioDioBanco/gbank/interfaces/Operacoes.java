@@ -16,5 +16,7 @@ public interface Operacoes {
 
     public void exibirDadosBancarios(ContaBancaria conta);
 
+
+    void gerarChavePix(ContaBancaria conta, Integer n);
 }
 

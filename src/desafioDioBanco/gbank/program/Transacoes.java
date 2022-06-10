@@ -6,6 +6,7 @@ import desafioDioBanco.gbank.interfaces.Operacoes;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Random;
 import java.util.TimeZone;
 
 public class Transacoes implements Operacoes {
@@ -65,5 +66,37 @@ public class Transacoes implements Operacoes {
         System.out.println("Banco: " + conta.getNome());
         System.out.println("Agência: " + conta.getCodigo());
         System.out.println("Nº da Conta: " + conta.getNumConta());
+        System.out.println("Chave pix: " + conta.getChavePix());
+    }
+
+    @Override
+    public void gerarChavePix(ContaBancaria conta, Integer n) {
+        /*int lowerLimit = 97;
+        int upperLimit = 122;
+        n = 12;
+        Random random = new Random();
+        StringBuffer r = new StringBuffer(n);
+        for (int i = 0; i < n; i++) {
+            int nextRandomChar = lowerLimit
+                    + (int)(random.nextFloat()
+                    * (upperLimit - lowerLimit + 1));
+            r.append((char)nextRandomChar);
+        }
+        conta.setChavePix(r.toString());*/
+
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "0123456789"
+                + "abcdefghijklmnopqrstuvxyz";
+        StringBuilder sb = new StringBuilder(n);
+
+        for (int i = 0; i < n; i++) {
+            int index = (int)(AlphaNumericString.length()
+                    * Math.random());
+            sb.append(AlphaNumericString
+                    .charAt(index));
+        }
+        conta.setChavePix(sb.toString());
+
+        System.out.println("Sua nova chave é: " + conta.getChavePix());
     }
 }

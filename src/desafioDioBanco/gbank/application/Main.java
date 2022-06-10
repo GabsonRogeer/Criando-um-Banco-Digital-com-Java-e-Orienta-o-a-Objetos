@@ -6,10 +6,7 @@ import desafioDioBanco.gbank.program.Validador;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.TimeZone;
+import java.util.*;
 
 public class Main {
 
@@ -37,6 +34,7 @@ public class Main {
                 System.out.println("|6 - Sacar                                                   |");
                 System.out.println("|7 - Depositar                                               |");
                 System.out.println("|8 - Transferir                                              |");
+                System.out.println("|9 - Gerar Chave Pix (Aleatória)                             |");
                 System.out.println("*------------------------------------------------------------*");
 
                 System.out.print("Informe a opção: ");
@@ -199,6 +197,22 @@ public class Main {
                             }
 
                             transacoes.transferir(contaDepositante, Double.parseDouble(valor), contaRecebedor);
+                        }
+
+                        break;
+
+                    case "9":
+                        System.out.println("-> GERAR CHAVE ALEATÓRIA");
+                        System.out.print("Informe o CPF da pessoa: ");
+                        String cpfPix = sc.nextLine();
+
+                        if (Validador.isContaExistente(contas, cpfPix)) {
+
+                            for (ContaBancaria conta : contas) {
+                                if (conta.getPessoa().getCpf().equals(cpfPix)) {
+                                    transacoes.gerarChavePix(conta, 12);
+                                }
+                            }
                         }
 
                         break;
