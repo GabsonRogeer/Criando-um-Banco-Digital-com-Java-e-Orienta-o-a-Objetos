@@ -13,7 +13,9 @@
     3. No saque de dinheiro o sistema deverá verificar o saldo atual e ver se aquele valor é menor ou igual ao saldo da conta.
     4. No depósito de dinheiro deve ser obrigatoriamente identificado para qual conta está sendo depositado e o valor do depósito.
 
-
+### **Atualização v1.5.1**
+1. Agora é possível gerar uma chave pix aleatória no menu inicial.
+    1. A chave fica visivel na consulta completa pelo cpf do usuário.
 
 ### **Autor**
 
