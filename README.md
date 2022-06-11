@@ -2,9 +2,9 @@
 
 ### Modelagem de dados
 
-1. Uma pessoa é definida no sistema com as seguintes dados: nome,  data de nascimento e CPF.
-2. A instituição bancária deve ser criada assim que a aplicação inicia e ela deve possuir os seguintes dados: nome, data de criação e o código da agência bancária.
-3. Sobre a modelagem da conta deve atender os seguintes requisitos:
+1. Uma pessoa é definida no sistema com as seguintes dados: Nome,  Data de nascimento e CPF.
+2. A instituição bancária é criada assim que a aplicação inicia e ela possui os seguintes dados: nome, data de criação e o código da agência bancária.
+3. Sobre a modelagem da conta:
     1. Uma pessoa deve possuir apenas uma conta cadastrada
     2. Uma conta deve ser definida da seguinte forma: agência, número, pessoa, ativa e saldo.
 4. Em uma conta digital deve ser possível ter ou fazer: transferência bancária para outra pessoa, solicitar cartão de crédito, sacar e depositar dinheiro.
@@ -18,7 +18,7 @@
     1. A chave fica visivel na consulta completa pelo cpf do usuário.
 
 ### **Atualização v1.5.2**
-1. Agora cada conta só pode ter 1 chave pix aleatória cadastrada.
+1. Cada conta só pode ter 1 chave pix aleatória cadastrada.
 2. Deixa de mostrar 'null' para contas que não tenham chave pix cadastradas e agora imprimem uma mensagem na tela.
 3. Adicionado a opção de transferência via pix.
 
