@@ -27,9 +27,6 @@ public class ContaBancaria extends Instituicao {
         return numConta;
     }
 
-    public void setNumConta(String numero) {
-        this.numConta = numero;
-    }
 
     public boolean isAtiva() {
         return ativa;
@@ -49,10 +46,6 @@ public class ContaBancaria extends Instituicao {
 
     public Cliente getPessoa() {
         return pessoa;
-    }
-
-    public void setPessoa(Cliente pessoa) {
-        this.pessoa = pessoa;
     }
 
     public Date getDataCriacao() {

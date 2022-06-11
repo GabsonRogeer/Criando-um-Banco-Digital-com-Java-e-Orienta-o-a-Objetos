@@ -83,5 +83,15 @@ public class Validador {
         return false;
     }
 
+    public static boolean isPossivelGerarPix(ContaBancaria conta){
+        try {
+            if(!conta.getChavePix().isEmpty()){
+                return false;
+            }
+        } catch (NullPointerException e) {
+            //System.out.println("Chave pix já cadastrada, a sua chave é: "+ conta.getChavePix());
+        }
+        return true;
+    }
 
 }
