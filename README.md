@@ -17,6 +17,9 @@
 1. Agora é possível gerar uma chave pix aleatória no menu inicial.
     1. A chave fica visivel na consulta completa pelo cpf do usuário.
 
+### **Atualização v1.5.2**
+1. Agora cada conta só pode ter 1 chave aleatória pix cadastrada.
+
 ### **Autor**
 
 - **Gabson Roger** - [gabsonrogeer](https://github.com/gabsonrogeer)
