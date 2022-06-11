@@ -11,7 +11,6 @@ public class CartaoDigital {
     private Date validade;
     private Integer cvv;
 
-
     public CartaoDigital()throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
@@ -27,23 +26,11 @@ public class CartaoDigital {
         return numeroDoCartao;
     }
 
-    public void setNumeroDoCartao(Integer numeroDoCartao) {
-        this.numeroDoCartao = numeroDoCartao;
-    }
-
     public Date getValidade() {
         return validade;
     }
 
-    public void setValidade(Date validade) {
-        this.validade = validade;
-    }
-
     public Integer getCvv() {
         return cvv;
-    }
-
-    public void setCvv(Integer cvv) {
-        this.cvv = cvv;
     }
 }

@@ -177,26 +177,53 @@ public class Main {
                         System.out.print("Informe o CPF do depositante: ");
                         String cpfDepositante = sc.nextLine();
 
-                        System.out.print("Informe o CPF do recebedor: ");
-                        String cpfRecebedor = sc.nextLine();
+                        System.out.println("Realizar depósito via CPF ou PIX? (c/p) :");
+                        char ch = sc.next().charAt(0);
+                        if(ch == 'c') {
+                            System.out.print("Informe o CPF do recebedor: ");
+                            sc.nextLine();
+                            String cpfRecebedor = sc.nextLine();
 
-                        if (Validador.isContaExistente(contas, cpfDepositante)
-                                && Validador.isContaExistente(contas, cpfRecebedor)) {
-                            ContaBancaria contaDepositante = null, contaRecebedor = null;
-                            String valor;
+                            if (Validador.isContaExistente(contas, cpfDepositante)
+                                    && Validador.isContaExistente(contas, cpfRecebedor)) {
+                                ContaBancaria contaDepositante = null, contaRecebedor = null;
+                                String valor;
 
-                            System.out.print("Informe o valor do depósito: ");
-                            valor = sc.nextLine();
+                                System.out.print("Informe o valor do depósito: ");
+                                valor = sc.nextLine();
 
-                            for (ContaBancaria conta : contas) {
-                                if (conta.getPessoa().getCpf().equals(cpfDepositante)) {
-                                    contaDepositante = conta;
-                                } else if (conta.getPessoa().getCpf().equals(cpfRecebedor)) {
-                                    contaRecebedor = conta;
+                                for (ContaBancaria conta : contas) {
+                                    if (conta.getPessoa().getCpf().equals(cpfDepositante)) {
+                                        contaDepositante = conta;
+                                    } else if (conta.getPessoa().getCpf().equals(cpfRecebedor)) {
+                                        contaRecebedor = conta;
+                                    }
                                 }
+                                transacoes.transferir(contaDepositante, Double.parseDouble(valor), contaRecebedor);
                             }
+                        }
+                        else {
+                            System.out.print("Informe a ChavePix do recebedor: ");
+                            sc.nextLine();
+                            String pixRecebedor = sc.nextLine();
 
-                            transacoes.transferir(contaDepositante, Double.parseDouble(valor), contaRecebedor);
+                            if (Validador.isContaExistente(contas, cpfDepositante)
+                                    && Validador.isContaExistente(contas, pixRecebedor)) {
+                                ContaBancaria contaDepositante = null, contaRecebedor = null;
+                                String valor;
+
+                                System.out.print("Informe o valor do depósito: ");
+                                valor = sc.nextLine();
+
+                                for (ContaBancaria conta : contas) {
+                                    if (conta.getPessoa().getCpf().equals(cpfDepositante)) {
+                                        contaDepositante = conta;
+                                    } else if (conta.getChavePix().equals(pixRecebedor)) {
+                                        contaRecebedor = conta;
+                                    }
+                                }
+                                transacoes.transferir(contaDepositante, Double.parseDouble(valor), contaRecebedor);
+                            }
                         }
 
                         break;
@@ -204,12 +231,12 @@ public class Main {
                     case "9":
                         System.out.println("-> GERAR CHAVE ALEATÓRIA");
                         System.out.print("Informe o CPF da pessoa: ");
-                        String cpfPix = sc.nextLine();
+                        String chavePix = sc.nextLine();
 
-                        if (Validador.isContaExistente(contas, cpfPix)) {
+                        if (Validador.isContaExistente(contas, chavePix)) {
 
                             for (ContaBancaria conta : contas) {
-                                if (conta.getPessoa().getCpf().equals(cpfPix)) {
+                                if (conta.getPessoa().getCpf().equals(chavePix)) {
                                     transacoes.gerarChavePix(conta, 12);
                                 }
                             }

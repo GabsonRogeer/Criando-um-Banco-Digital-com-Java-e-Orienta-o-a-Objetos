@@ -41,7 +41,6 @@ public class Transacoes implements Operacoes {
                     + contaDestino.getPessoa().getNome() );
             System.out.println("O Saldo atual de sua conta é: R$"+ conta.getSaldo());
         }
-
     }
 
     @Override
@@ -65,7 +64,12 @@ public class Transacoes implements Operacoes {
         System.out.println("Banco: " + conta.getNome());
         System.out.println("Agência: " + conta.getCodigo());
         System.out.println("Nº da Conta: " + conta.getNumConta());
-        System.out.println("Chave pix: " + conta.getChavePix());
+        if(conta.getChavePix() == null){
+            System.out.println("Chave pix: Chave ainda não cadastrada");
+        }
+        else {
+            System.out.println("Chave pix: " + conta.getChavePix());
+        }
     }
 
     @Override
@@ -102,6 +106,5 @@ public class Transacoes implements Operacoes {
         else {
             System.out.println("Chave pix já cadastrada, a sua chave é: " + conta.getChavePix());
         }
-
     }
 }

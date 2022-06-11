@@ -12,7 +12,7 @@ public class Instituicao {
         this.nome = "GBank";
         this.cnpj = "85.577.999/0023-14";
         this.dataDeCriacao = new Date();
-        this.codigo = "0007";
+        this.codigo = "0013";
     }
 
     public String getNome() {
