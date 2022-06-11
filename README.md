@@ -18,7 +18,9 @@
     1. A chave fica visivel na consulta completa pelo cpf do usuário.
 
 ### **Atualização v1.5.2**
-1. Agora cada conta só pode ter 1 chave aleatória pix cadastrada.
+1. Agora cada conta só pode ter 1 chave pix aleatória cadastrada.
+2. Deixa de mostrar 'null' para contas que não tenham chave pix cadastradas e agora imprimem uma mensagem na tela.
+3. Adicionado a opção de transferência via pix.
 
 ### **Autor**
 
