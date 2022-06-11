@@ -2,7 +2,7 @@
 
 ### Modelagem de dados
 
-1. Uma pessoa é definida no sistema com as seguintes dados: nome, gênero,  data de nascimento e CPF.
+1. Uma pessoa é definida no sistema com as seguintes dados: nome,  data de nascimento e CPF.
 2. A instituição bancária deve ser criada assim que a aplicação inicia e ela deve possuir os seguintes dados: nome, data de criação e o código da agência bancária.
 3. Sobre a modelagem da conta deve atender os seguintes requisitos:
     1. Uma pessoa deve possuir apenas uma conta cadastrada
