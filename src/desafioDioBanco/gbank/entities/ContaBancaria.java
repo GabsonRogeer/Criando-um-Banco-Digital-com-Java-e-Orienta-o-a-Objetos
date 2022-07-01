@@ -14,6 +14,13 @@ public class ContaBancaria extends Instituicao {
 
     private String chavePix;
 
+    public ContaBancaria(String numConta, boolean ativa, Double saldo, Cliente pessoa) {
+        Random random = new Random();
+        this.numConta = "" + random.nextInt(4) + "-" + random.nextInt(1);
+        this.ativa = Boolean.TRUE;
+        this.saldo = 0.0;
+        this.pessoa = pessoa;
+    }
 
     public ContaBancaria() {
         Random random = new Random();
@@ -27,6 +34,9 @@ public class ContaBancaria extends Instituicao {
         return numConta;
     }
 
+    public void setNumConta(String numConta) {
+        this.numConta = numConta;
+    }
 
     public boolean isAtiva() {
         return ativa;

@@ -71,12 +71,13 @@ public class Validador {
     }
 
     public static boolean isContaExistente (List<ContaBancaria> conta, String cpf){
-        if(!conta.isEmpty()){
-            for (ContaBancaria c : conta){
-                if (c.getPessoa().getCpf().equals(cpf)){
-                    return true;
+        for (ContaBancaria c : conta){
+            if (c.getPessoa().getCpf().equals(cpf)){
+                return true;
                 }
             }
+        if(conta.isEmpty()){
+            return false;
         }
 
         System.out.println("O Cpf informado não pertence a nenhuma conta!");

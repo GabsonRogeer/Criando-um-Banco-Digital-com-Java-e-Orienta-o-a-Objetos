@@ -1,8 +1,7 @@
 package desafioDioBanco.gbank.application;
 
 import desafioDioBanco.gbank.entities.ContaBancaria;
-import desafioDioBanco.gbank.program.Transacoes;
-import desafioDioBanco.gbank.program.Validador;
+import desafioDioBanco.gbank.entities.GerenciadorContas;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,10 +10,10 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) throws ParseException {
+        Locale.setDefault(Locale.US);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-        Transacoes transacoes = new Transacoes();
-        List<ContaBancaria> contas = new ArrayList<>();
+        GerenciadorContas gerenciador = new GerenciadorContas();
 
         try (Scanner sc = new Scanner(System.in)) {
             String opcao = "";
@@ -66,21 +65,13 @@ public class Main {
                             c1.getPessoa().setDataDeNascimento(sdf.parse(dataNascimento));
                         }
 
-                        if (Validador.isPossivelCadastrarConta(c1)) {
-                            contas.add(c1);
-
-                            System.out.println("Conta criada com sucesso!");
-                        }
+                        gerenciador.criarConta(c1);
 
                         break;
                     case "2":
                         System.out.println("-> LISTAR CONTAS");
 
-                        if (!contas.isEmpty()) {
-                            for (ContaBancaria conta : contas) {
-                                System.out.println("Número:" + conta.getNumConta() + "Agência: " + conta.getCodigo());
-                            }
-                        }
+                        gerenciador.listarContas();
 
                         break;
                     case "3":
@@ -89,13 +80,7 @@ public class Main {
                         System.out.print("Informe o CPF da pessoa: ");
                         String cpfDados = sc.nextLine();
 
-                        if (Validador.isContaExistente(contas, cpfDados)) {
-                            for (ContaBancaria conta : contas) {
-                                if (conta.getPessoa().getCpf().equals(cpfDados)) {
-                                    transacoes.exibirDadosBancarios(conta);
-                                }
-                            }
-                        }
+                        gerenciador.dadosBancariosPeloCpf(cpfDados);
 
                         break;
                     case "4":
@@ -104,13 +89,7 @@ public class Main {
                         System.out.print("Informe o CPF da pessoa: ");
                         String cpfSaldo = sc.nextLine();
 
-                        if (Validador.isContaExistente(contas, cpfSaldo)) {
-                            for (ContaBancaria conta : contas) {
-                                if (conta.getPessoa().getCpf().equals(cpfSaldo)) {
-                                    System.out.println("O saldo é de: " + conta.getSaldo());
-                                }
-                            }
-                        }
+                        gerenciador.informarSaldo(cpfSaldo);
                         break;
                     case "5":
                         System.out.println("-> SOLICITAR CARTÃO");
@@ -118,13 +97,7 @@ public class Main {
                         System.out.print("Informe o CPF da pessoa: ");
                         String cpfCartao = sc.nextLine();
 
-                        if (Validador.isContaExistente(contas, cpfCartao)) {
-                            for (ContaBancaria conta : contas) {
-                                if (conta.getPessoa().getCpf().equals(cpfCartao)) {
-                                    transacoes.solicitarCartao(conta);
-                                }
-                            }
-                        }
+                        gerenciador.solicitarCartao(cpfCartao);
 
                         break;
                     case "6":
@@ -133,18 +106,10 @@ public class Main {
                         System.out.print("Informe o CPF da pessoa: ");
                         String cpfSacar = sc.nextLine();
 
-                        if (Validador.isContaExistente(contas, cpfSacar)) {
-                            String valor;
+                        System.out.print("Informe o valor do saque: ");
+                        Double valor = sc.nextDouble();
 
-                            System.out.print("Informe o valor do saque: ");
-                            valor = sc.nextLine();
-
-                            for (ContaBancaria conta : contas) {
-                                if (conta.getPessoa().getCpf().equals(cpfSacar)) {
-                                    transacoes.sacar(conta, Double.parseDouble(valor));
-                                }
-                            }
-                        }
+                        gerenciador.sacarPeloCpf(cpfSacar, valor);
 
                         break;
                     case "7":
@@ -153,77 +118,41 @@ public class Main {
                         System.out.print("Informe o CPF da pessoa: ");
                         String cpfDeposito = sc.nextLine();
 
-                        if (Validador.isContaExistente(contas, cpfDeposito)) {
-                            String valor;
+                        System.out.print("Informe o valor do depósito: ");
+                        Double valorDeposito = sc.nextDouble();
 
-                            System.out.print("Informe o valor do depósito: ");
-                            valor = sc.nextLine();
-
-                            try {
-                                for (ContaBancaria conta : contas) {
-                                    if (conta.getPessoa().getCpf().equals(cpfDeposito)) {
-                                        transacoes.depositar(conta, Double.parseDouble(valor));
-                                    }
-                                }
-                            } catch (NumberFormatException e){
-                                System.out.println("Insira '.'(ponto) no lugar da ','(virgula)");
-                            }
-                        }
+                        gerenciador.depositarPeloCpf(cpfDeposito, valorDeposito);
 
                         break;
                     case "8":
                         System.out.println("-> TRANSFERÊNCIA");
 
-                        System.out.print("Informe o CPF do depositante: ");
-                        String cpfDepositante = sc.nextLine();
-
+                        System.out.println();
                         System.out.println("Realizar depósito via CPF ou PIX? (c/p) :");
                         char ch = sc.next().charAt(0);
                         if(ch == 'c') {
+                            System.out.print("Informe o CPF do depositante: ");
+                            String cpfDepositante = sc.nextLine();
                             System.out.print("Informe o CPF do recebedor: ");
-                            sc.nextLine();
+                            //sc.nextLine();
                             String cpfRecebedor = sc.nextLine();
 
-                            if (Validador.isContaExistente(contas, cpfDepositante)
-                                    && Validador.isContaExistente(contas, cpfRecebedor)) {
-                                ContaBancaria contaDepositante = null, contaRecebedor = null;
-                                String valor;
+                            System.out.print("Informe o valor do depósito: ");
+                            Double valorT = sc.nextDouble();
 
-                                System.out.print("Informe o valor do depósito: ");
-                                valor = sc.nextLine();
-
-                                for (ContaBancaria conta : contas) {
-                                    if (conta.getPessoa().getCpf().equals(cpfDepositante)) {
-                                        contaDepositante = conta;
-                                    } else if (conta.getPessoa().getCpf().equals(cpfRecebedor)) {
-                                        contaRecebedor = conta;
-                                    }
-                                }
-                                transacoes.transferir(contaDepositante, Double.parseDouble(valor), contaRecebedor);
-                            }
+                            gerenciador.transferirPeloCpf(cpfDepositante, cpfRecebedor, valorT);
                         }
                         else {
+                            System.out.print("Informe o CPF do depositante: ");
+                            String cpfDepositante = sc.nextLine();
+
                             System.out.print("Informe a ChavePix do recebedor: ");
-                            sc.nextLine();
                             String pixRecebedor = sc.nextLine();
 
-                            if (Validador.isContaExistente(contas, cpfDepositante)
-                                    && Validador.isContaExistente(contas, pixRecebedor)) {
-                                ContaBancaria contaDepositante = null, contaRecebedor = null;
-                                String valor;
+                            System.out.print("Informe o valor do depósito: ");
+                            Double valorpix = sc.nextDouble();
 
-                                System.out.print("Informe o valor do depósito: ");
-                                valor = sc.nextLine();
-
-                                for (ContaBancaria conta : contas) {
-                                    if (conta.getPessoa().getCpf().equals(cpfDepositante)) {
-                                        contaDepositante = conta;
-                                    } else if (conta.getChavePix().equals(pixRecebedor)) {
-                                        contaRecebedor = conta;
-                                    }
-                                }
-                                transacoes.transferir(contaDepositante, Double.parseDouble(valor), contaRecebedor);
-                            }
+                            gerenciador.tranferirPeloPix(cpfDepositante, pixRecebedor, valorpix);
                         }
 
                         break;
@@ -231,26 +160,16 @@ public class Main {
                     case "9":
                         System.out.println("-> GERAR CHAVE ALEATÓRIA");
                         System.out.print("Informe o CPF da pessoa: ");
-                        String chavePix = sc.nextLine();
+                        String cpfPix = sc.nextLine();
 
-                        if (Validador.isContaExistente(contas, chavePix)) {
-
-                            for (ContaBancaria conta : contas) {
-                                if (conta.getPessoa().getCpf().equals(chavePix)) {
-                                    transacoes.gerarChavePix(conta, 12);
-                                }
-                            }
-                        }
+                        gerenciador.gerarChavePix(cpfPix);
 
                         break;
                     default:
                         break;
                 }
             } while (!sair);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
-    }
 
+    }
 }
