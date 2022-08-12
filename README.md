@@ -26,9 +26,6 @@
 
 - **Gabson Roger** - [gabsonrogeer](https://github.com/gabsonrogeer)
 
-#### **Fonte**
-
-- **Alex Rogério** - [alexrogeriodj](https://github.com/alexrogeriodj)
 
 ### Palavras-chave
 
